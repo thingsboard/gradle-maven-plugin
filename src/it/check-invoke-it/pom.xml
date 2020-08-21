@@ -18,9 +18,9 @@
 		</configuration>
 	</plugin>
 	<plugin>
-	       <groupId>org.fortasoft</groupId>
-	      <artifactId>gradle-maven-plugin</artifactId>
-	      <version>1.0.8</version>
+		<groupId>codes.ouertani.gradlemavenplugin</groupId>
+		<artifactId>gradle-maven-plugin</artifactId>
+		<version>1.0.12</version>
 	        <configuration>
 	        	<tasks>
 					<task>doIt</task>

@@ -4,7 +4,7 @@
     <groupId>org.thingsboard</groupId>
     <artifactId>gradle-maven-plugin</artifactId>
     <packaging>maven-plugin</packaging>
-    <version>1.0.12</version>
+    <version>1.0.13</version>
     <name>gradle-maven-plugin Maven Mojo</name>
     <url>https://github.com/LendingClub/gradle-maven-plugin</url>
     <parent>

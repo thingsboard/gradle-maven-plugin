@@ -225,7 +225,9 @@ public class GradleMojo extends AbstractMojo {
 				c = c.useDistribution(new URI(gradleDistribution));
 			}
 
-			connection = c.connect();
+			synchronized (this) {
+				connection = c.connect();
+			}
 
 			BuildLauncher launcher = connection.newBuild();
 			launcher.forTasks(getTasks());

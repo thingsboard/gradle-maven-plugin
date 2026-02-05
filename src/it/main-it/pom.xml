@@ -12,9 +12,9 @@
     <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.11.0</version>
+        <version>3.13.0</version>
         <configuration>
-            <release>21</release>
+            <release>25</release>
         </configuration>
     </plugin>
 	<plugin>
@@ -22,6 +22,7 @@
         <artifactId>gradle-maven-plugin</artifactId>
         <version>1.0.14</version>
 	        <configuration>
+	        	<gradleVersion>9.3.1</gradleVersion>
 	        	<tasks>
 					<task>clean</task>
 						<task>compileJava</task>

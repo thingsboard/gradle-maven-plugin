@@ -37,6 +37,8 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Goal which invokes gradle!
@@ -44,6 +46,14 @@ import java.util.Map;
  */
 @Mojo(name="invoke", threadSafe = true)
 public class GradleMojo extends AbstractMojo {
+
+	/**
+	 * Serializes all Gradle invocations across the Maven reactor.
+	 * Gradle Tooling API uses a shared daemon registry and project cache,
+	 * so parallel executions (-T N) cause file lock contention. A static
+	 * lock ensures only one Gradle build runs at a time per JVM.
+	 */
+	private static final Lock GRADLE_LOCK = new ReentrantLock();
 
 	/**
 		Any maven property with this prefix automatically gets added as a 
@@ -191,6 +201,7 @@ public class GradleMojo extends AbstractMojo {
 
 	public void execute() throws MojoExecutionException, MojoFailureException {
 
+		GRADLE_LOCK.lock();
 		ProjectConnection connection = null;
 		try {
 			NewMojoLogger.attachMojo(this);
@@ -271,6 +282,7 @@ public class GradleMojo extends AbstractMojo {
 				connection.close();
 			}
 			NewMojoLogger.detachMojo();
+			GRADLE_LOCK.unlock();
 		}
 	}
 
